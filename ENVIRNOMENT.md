@@ -79,17 +79,17 @@ A comprehensive guide for building a dedicated Ubuntu Server 24.04 LTS environme
 - Portable VM can be moved to different machines
 
 ### Setup Option 2: VirtualBox on Ubuntu Server
-**Not recommended** for your use case.
+**Not recommended** for server-based deployments.
 
 Why:
-- Ubuntu Server has no GUI, difficult to manage VirtualBox
-- VirtualBox requires X11/Wayland (heavyweight for a server)
-- Better to use Docker for containerized tools on Ubuntu
+- Ubuntu Server has no GUI, making VirtualBox difficult to manage
+- VirtualBox requires X11/Wayland, which is heavyweight for a headless server
+- Docker is better suited for containerized security tools on Ubuntu Server
 
 ### Setup Option 3: Dual Boot (Not Recommended)
-- Kali as second partition on Linux
-- Loses convenience of snapshots and isolation
-- Extra maintenance overhead
+- Kali as a second partition alongside a primary OS
+- Loses the convenience of snapshots and lab isolation
+- Introduces extra maintenance overhead with little benefit over a VM
 
 ---
 
