@@ -1,7 +1,7 @@
-# Cybersecurity Study Environment Setup
+# Cybersecurity Study Environment Setup Guide
 
 ## Overview
-A dedicated Ubuntu Server 24.04 LTS environment for blue team cybersecurity studies, with Docker containerization for security tools and lab environments. Includes guidance on setting up Kali Linux for offensive security modules.
+A comprehensive guide for building a dedicated Ubuntu Server 24.04 LTS environment for blue team cybersecurity studies, with Docker containerization for security tools and lab environments. Includes architecture recommendations for integrating Kali Linux for offensive security modules.
 
 ---
 
@@ -53,15 +53,15 @@ A dedicated Ubuntu Server 24.04 LTS environment for blue team cybersecurity stud
 
 ---
 
-## Kali Linux for Studies
+## Kali Linux Integration for Studies
 
-### Setup Option 1: VirtualBox on Windows 11 (Recommended)
-**Yes, you can absolutely do this from Windows 11.**
+### Setup Option 1: VirtualBox on Windows (Recommended)
+**VirtualBox on Windows is a viable and practical option for running Kali Linux.**
 
 #### Setup Steps:
-1. **Install VirtualBox** on Windows 11
+1. **Install VirtualBox** on Windows
    - Download from virtualbox.org
-   - Free and lightweight
+   - Free and lightweight hypervisor
 2. **Download Kali Linux VM** 
    - Official pre-built Kali VirtualBox images available
    - Or download ISO and create VM from scratch
@@ -69,14 +69,14 @@ A dedicated Ubuntu Server 24.04 LTS environment for blue team cybersecurity stud
    - Allocate adequate resources: 4GB RAM minimum, 20GB disk
    - Enable nested virtualization if needed
 4. **Launch and Study**
-   - Run labs isolated from your main system
+   - Run labs isolated from the host system
    - Snapshot VM before each major lab (easy rollback)
 
 **Advantages:**
 - No need to reboot into Linux
-- Easy switching between Windows work and Kali studies
-- Snapshots for lab reset
-- Portable (can move VM to different machines)
+- Easy switching between host OS and Kali studies
+- VM snapshots enable rapid lab resets
+- Portable VM can be moved to different machines
 
 ### Setup Option 2: VirtualBox on Ubuntu Server
 **Not recommended** for your use case.
@@ -97,7 +97,7 @@ Why:
 
 ```
 ┌─────────────────────────────────────────────┐
-│         Windows 11 Workstation              │
+│      Workstation (Windows/macOS/Linux)      │
 │                                             │
 │  ┌───────────────────────────────────────┐  │
 │  │      VirtualBox + Kali Linux VM       │  │
@@ -133,49 +133,52 @@ Why:
 
 ## Study Path Alignment
 
-### Security+ Studies
-- **Windows:** Kali VM for network analysis labs (wireshark, nmap)
-- **Ubuntu:** Docker setup for understanding SIEM, log management, security controls
-- **Wazuh:** Deploy container, learn log ingestion and threat detection
+### Security+ Certification Path
+- **Kali VM:** Network analysis labs (wireshark, nmap, packet analysis)
+- **Ubuntu Docker:** Understanding SIEM architecture, log management, security controls
+- **Wazuh Container:** Deploy and configure SIEM for log ingestion and threat detection
 
-### CySA+ Studies (Vulnerability Management)
-- **Windows Kali:** Vulnerability scanning (Nessus, OpenVAS in containers)
-- **Ubuntu Wazuh:** Monitor scan results, correlate with log data, create detection rules
+### CySA+ Certification Path (Vulnerability Management)
+- **Kali VM:** Vulnerability scanning tools (Nessus, OpenVAS in containers)
+- **Ubuntu Wazuh:** Monitor scan results, correlate with event logs, create detection rules
+- **Integration:** Feed vulnerability data into SIEM for comprehensive risk assessment
 
-### BTL1 Studies (Threat Intelligence)
-- **Ubuntu Wazuh:** Analyze indicators of compromise (IOCs), create detection rules
-- **Kali:** Understand attack techniques (MITRE ATT&CK framework)
-- **Docker:** Containerize threat intel tools (YARA, threat feeds)
+### BTL1 Certification Path (Threat Intelligence)
+- **Ubuntu Wazuh:** Analyze indicators of compromise (IOCs), develop detection rules
+- **Kali VM:** Understand attack techniques using MITRE ATT&CK framework
+- **Docker Containers:** Containerize threat intel tools (YARA, threat feeds, threat hunting)
+- **Integration:** Correlate threat intelligence with detected events
 
 ---
 
 ## Initial Setup Checklist
 
-### Windows 11
-- [ ] Install VirtualBox
+### Host Operating System
+- [ ] Install VirtualBox (or preferred hypervisor)
 - [ ] Download Kali Linux ISO or pre-built VM image
 - [ ] Create/import Kali VM with snapshots enabled
-- [ ] Test network connectivity to Ubuntu server
+- [ ] Configure network settings for VM connectivity
+- [ ] Test network connectivity between host and Ubuntu server
 
 ### Ubuntu Server 24.04
 - [ ] Install Docker and docker-compose
-- [ ] Install Portainer (optional, for GUI management)
-- [ ] Pull Wazuh Docker images
+- [ ] Install Portainer for container management (optional)
+- [ ] Pull official Wazuh Docker images
 - [ ] Create docker-compose.yml for Wazuh stack
-- [ ] Configure persistent volumes for data
-- [ ] Test Wazuh dashboard access from Windows
+- [ ] Configure persistent volumes for data storage
+- [ ] Test Wazuh dashboard access from host machine
 
-### Initial Wazuh Deployment
+### Wazuh Deployment
 ```bash
-# Create docker-compose.yml with:
+# Create docker-compose.yml containing:
 # - Wazuh Manager
 # - Wazuh Dashboard (web UI)
 # - Elasticsearch (data storage)
 
 docker-compose up -d
 
-# Access dashboard at https://ubuntu-server-ip
-# Default credentials provided in compose file
+# Access dashboard via HTTPS on specified port
+# Configure with provided default credentials
 ```
 
 ---
@@ -240,13 +243,14 @@ Snapshot → Run lab → Experiment → Revert to snapshot
 
 ---
 
-## Notes for Your Security+ Journey
+## Career Readiness & Practical Skills
 
 This setup directly supports:
-- **Blue team fundamentals** – Understanding detection and response
-- **SIEM concepts** – Wazuh teaches real SIEM operations
-- **Container security** – Docker knowledge increasingly required
-- **Lab repeatability** – Snapshots and containers enable consistent learning
-- **Career readiness** – Skills directly applicable to SOC analyst roles in South Africa and Netherlands
+- **Blue team fundamentals** – Understanding detection and response workflows
+- **SIEM operations** – Wazuh teaches real-world SIEM architecture and rule management
+- **Container security** – Docker knowledge increasingly required in modern environments
+- **Lab repeatability** – Snapshots and containers enable consistent, reproducible learning
+- **Industry relevance** – Skills directly applicable to SOC analyst and blue team roles
+- **Balanced security knowledge** – Kali (offensive) + Wazuh (defensive) provides comprehensive perspective
 
-The combination of Kali (offense) + Wazuh (defense) gives you balanced knowledge for understanding security both ways.
+The combination of offensive tools (Kali) and defensive tools (Wazuh) creates a holistic learning environment that mirrors real-world security operations.
